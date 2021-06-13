@@ -1,0 +1,42 @@
+<div class="form-1-container section-container">
+    <div class="container">
+        <div class="row"> 
+            <div class="col-md-10 offset-md-1 form-1-box wow fadeInUp">
+                <form > 
+                    <fieldset class="form-group border p-3" >
+                    <legend class="w-auto px-2"> <strong> TEST </strong> ilość pytań: {{ numberOfQuestion }} rodzaj: {{questionType}} Czas: {{ timer }} minut</legend> <br>
+                    <legend class="w-auto px-2"></legend>
+                        <div class="form-group"  *ngFor="let x of questionTab; let i = index" >
+                            <fieldset class="form-group border p-3" > 
+                                <label for="{{x.name}}">Nazwa: {{x.name}}</label><br>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="{{x.name}}a" name="{{x.name}}" class="custom-control-input">
+                                        <label class="custom-control-label" for="{{x.name}}a"> {{x.a1}} </label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="{{x.name}}b" name="{{x.name}}" class="custom-control-input">
+                                        <label class="custom-control-label" for="{{x.name}}b"> {{x.a2}} </label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="{{x.name}}c" name="{{x.name}}" class="custom-control-input">
+                                        <label class="custom-control-label" for="{{x.name}}c"> {{x.a3}} </label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="{{x.name}}d" name="{{x.name}}" class="custom-control-input">
+                                        <label class="custom-control-label" for="{{x.name}}d"> {{x.a4}} </label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div> 
+                        <div class="form-group row text-center">
+                            <div class="col">
+                                <button type="submit" class="btn btn-primary btn-customized">Sprawdź</button>
+                            </div>
+                        </div>  
+                    </fieldset>    
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

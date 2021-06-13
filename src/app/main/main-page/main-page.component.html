@@ -1,0 +1,50 @@
+<div class="form-1-container section-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 offset-md-1 form-1-box wow fadeInUp">
+                <form [formGroup] = "testFrom">
+                    <fieldset class="form-group border p-3">
+                        <legend class="w-auto px-2">Wybierz Test:</legend>
+                        <div class="form-group">
+                            <label for="subject">Przedmiot</label>
+                            <select class="form-control" formControlName="subject">  
+                              <option *ngFor="let type of typeOfSubject" [value] = type >
+                                {{ type }}
+                              </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="question">Rodzaj pytań</label>
+                            <select class="form-control" formControlName="question">
+                              <option *ngFor="let type of typeOfQuestion" [value] = type >
+                                  {{ type }}
+                              </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="volume">Ilość pytań</label>
+                            <select class="form-control" formControlName="volume">
+                              <option *ngFor="let type of typeOfVolumen" [value] = type >
+                                  {{ type }}
+                              </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="time">Czas na rozwiązanie</label>
+                            <select class="form-control" formControlName="time">
+                              <option *ngFor="let type of typeOfTime" [value] = type >
+                                  {{ type }} minut
+                              </option>
+                            </select>
+                        </div>
+                        <div class="form-group row text-center">
+                            <div class="col">
+                                <button type="submit" class="btn btn-primary btn-customized" (click) ="submit()">START</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
