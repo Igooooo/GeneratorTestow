@@ -11,46 +11,36 @@ import { MainService } from '../main.service';
 
 export class TestComponent implements OnInit {
 
-  testForm2  = new FormGroup({})
+  questionFrom: FormGroup;
   testForm?: testForm;
   numberOfQuestion?: any;
   questionType?:string;
   timer?: any;
   questionTab: any = [];
 
-  question = [{
-    questionName: 'pytanie 1',
-    a1:"A tekst", 
-    a2:"B tekst", 
-    a3:"C tekst", 
-    a4:"D tekst",
-    type: "type 1",
-    answer: '',
-    correct: 'A'
-  },
-  {
-    questionName: 'pytanie 2',
-    a1:"A tekst", 
-    a2:"B tekst", 
-    a3:"C tekst", 
-    a4:"D tekst",
-    type: "type 2",
-    answer: '',
-    correct: 'A'
-  },
-  {
-    questionName: 'pytanie 3',
-    a1:"A tekst", 
-    a2:"B tekst", 
-    a3:"C tekst", 
-    a4:"D tekst",
-    type: "type 3",
-    answer: '',
-    correct: 'A'
-  }]
+  questionDB = [
+    {questionName: 'pytanie 1', a1:"A tekst", a2:"B tekst", a3:"C tekst", a4:"D tekst", type: "type 1", correct: 'A'},
+    {questionName: 'pytanie 2', a1:"A tekst", a2:"B tekst", a3:"C tekst", a4:"D tekst", type: "type 2", correct: 'A'},
+    {questionName: 'pytanie 3', a1:"A tekst", a2:"B tekst", a3:"C tekst", a4:"D tekst", type: "type 3", correct: 'A'},
+    {questionName: 'pytanie 4', a1:"A tekst", a2:"B tekst", a3:"C tekst", a4:"D tekst", type: "type 1", correct: 'A'},
+    {questionName: 'pytanie 5', a1:"A tekst", a2:"B tekst", a3:"C tekst", a4:"D tekst", type: "type 2", correct: 'A'},
+    {questionName: 'pytanie 6', a1:"A tekst", a2:"B tekst", a3:"C tekst", a4:"D tekst", type: "type 3", correct: 'A'},
+    {questionName: 'pytanie 7', a1:"A tekst", a2:"B tekst", a3:"C tekst", a4:"D tekst", type: "type 1", correct: 'A'},
+    {questionName: 'pytanie 8', a1:"A tekst", a2:"B tekst", a3:"C tekst", a4:"D tekst", type: "type 2", correct: 'A'},
+    {questionName: 'pytanie 9', a1:"A tekst", a2:"B tekst", a3:"C tekst", a4:"D tekst", type: "type 3", correct: 'A'},
+    {questionName: 'pytanie 10', a1:"A tekst", a2:"B tekst", a3:"C tekst", a4:"D tekst", type: "type 1", correct: 'A'},
+    {questionName: 'pytanie 11', a1:"A tekst", a2:"B tekst", a3:"C tekst", a4:"D tekst", type: "type 2", correct: 'A'},
+    {questionName: 'pytanie 12', a1:"A tekst", a2:"B tekst", a3:"C tekst", a4:"D tekst", type: "type 3", correct: 'A'},
+    {questionName: 'pytanie 13', a1:"A tekst", a2:"B tekst", a3:"C tekst", a4:"D tekst", type: "type 1", correct: 'A'},
+    {questionName: 'pytanie 14', a1:"A tekst", a2:"B tekst", a3:"C tekst", a4:"D tekst", type: "type 2", correct: 'A'},
+    {questionName: 'pytanie 15', a1:"A tekst", a2:"B tekst", a3:"C tekst", a4:"D tekst", type: "type 3", correct: 'A'}, 
+  ]
 
   constructor(private data: MainService,
               private formBuilder: FormBuilder,) { 
+   this.questionFrom = this.formBuilder.group({
+        question: this.formBuilder.array([])
+    })
   }
 
   ngOnInit(): void {
@@ -58,33 +48,33 @@ export class TestComponent implements OnInit {
     this.numberOfQuestion = this.testForm?.volume;  
     this.questionType = this.testForm?.question;
     this.timer = this.testForm?.time;
-    this.createTest(Number(this.numberOfQuestion));
-    this.createTestFrom();
+    this.addQuestionToForm(this.numberOfQuestion);
   }
 
-  
-  // Tworzenie testu
-  createTest(value: number) : void {
-    for(let i = 1; i <= value ; i++) {
-      this.questionTab.push(this.question);
+  get question() {
+    return this.questionFrom.get("question") as FormArray
+  } 
+
+  newQuestionNew(question: any): FormGroup {
+    return this.formBuilder.group({
+      question: [question.questionName, Validators.required],
+      answer: ['false', Validators.required],
+      type: [question.type, Validators.required]
+    })
+  }
+
+  addQuestionToForm(value: number) {
+    for(let i = 0; i < value ; i++) {
+      this.question.push(this.newQuestionNew(this.questionDB[i]))
     }
-    this.testForm2 = this.formBuilder.group(this.questionTab)
+  }
+  
+  deleteQuestion(questionIndex: number) {
+    this.question.removeAt(questionIndex);
   }
 
- 
-// Tworzenie formularza
-  createTestFrom() : void {
-       this.testForm2 = this.formBuilder.group({
-        questionName: ['', Validators.compose([Validators.required])],
-        answer: [' ', Validators.compose([Validators.required])],
-        correct: [this.question[0].correct, Validators.compose([Validators.required])]
-      });
+  onSubmit(){
+    console.log(this.questionFrom.value);
   }
-
-  verifyTest() {
-    console.log(this.testForm2.value)
-  }
-
-
 
 }
