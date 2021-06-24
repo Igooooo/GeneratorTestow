@@ -19,7 +19,7 @@ export class MainPageComponent implements OnInit {
   typeOfSubject = Object.values(subjectType);
   typeOfQuestionDefault = questionType.all;
   typeOfQuestion = Object.values(questionType);
-  typeOfVolumenDefault = volumenType.avr;
+  typeOfVolumenDefault = volumenType.min;
   typeOfVolumen = Object.values(volumenType);
   typeOfTimeDefault = timeType.avr;
   typeOfTime = Object.values(timeType);
