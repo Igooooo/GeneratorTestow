@@ -8,8 +8,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { AboutComponent } from './about/about.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-
+import { NgxSimpleCountdownModule } from 'ngx-simple-countdown';
 
 @NgModule({
   declarations: [
@@ -25,6 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    NgxSimpleCountdownModule
   ]
 })
 export class MainModule { }
