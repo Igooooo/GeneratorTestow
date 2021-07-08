@@ -10,6 +10,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxSimpleCountdownModule } from 'ngx-simple-countdown';
 import { CheckTestComponent } from './check-test/check-test.component';
+import { PatternCardComponent } from './pattern-card/pattern-card.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -18,7 +20,8 @@ import { CheckTestComponent } from './check-test/check-test.component';
     LoginComponent,
     RegistrationComponent,
     AboutComponent,
-    CheckTestComponent
+    CheckTestComponent,
+    PatternCardComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +29,8 @@ import { CheckTestComponent } from './check-test/check-test.component';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    NgxSimpleCountdownModule
+    NgxSimpleCountdownModule,
+    MatDialogModule
   ]
 })
 export class MainModule { }

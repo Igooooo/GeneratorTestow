@@ -5,6 +5,9 @@
             <div class="col-md-10 offset-md-1 form-1-box wow fadeInUp">
                 <fieldset class="form-group border p-3" >
                     <legend class="w-auto px-2"> <strong> TEST </strong> ilość pytań: {{ numberOfQuestion }} rodzaj: {{questionType}}</legend> <br>
+                    <div>
+                        <button (click)="openDialog()">KARTA WZORÓW</button>
+                    </div>
                     <div class="countdown"  simpleCountdown 
                                             [dateTo]="currentTimeInSeconds" 
                                             [endMessage]="'Koniec czasu!'"

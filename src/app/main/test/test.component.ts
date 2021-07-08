@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 import { timer } from 'rxjs';
 import { testForm } from 'src/app/shared/model/testForm';
 import { MainService } from '../main.service';
-
+import { PatternCardComponent } from '../pattern-card/pattern-card.component';
+import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-test',
   templateUrl: './test.component.html',
@@ -67,7 +68,8 @@ export class TestComponent implements OnInit {
 
   constructor(private data: MainService,
               private formBuilder: FormBuilder,
-              private router: Router) { 
+              private router: Router,
+              public dialog: MatDialog) { 
     this.questionFrom = this.formBuilder.group({
         question: this.formBuilder.array([])
     })
@@ -114,5 +116,12 @@ export class TestComponent implements OnInit {
   onfinishTime(): void {
     console.log('Koniec!');
     this.onSubmit();
+  }
+
+  openDialog() : void {
+    this.dialog.open(PatternCardComponent, {
+      height: '1800px',
+      width: '1800px'
+    });
   }
 }
