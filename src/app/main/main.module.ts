@@ -9,6 +9,7 @@ import { AboutComponent } from './about/about.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxSimpleCountdownModule } from 'ngx-simple-countdown';
+import { CheckTestComponent } from './check-test/check-test.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { NgxSimpleCountdownModule } from 'ngx-simple-countdown';
     TestComponent,
     LoginComponent,
     RegistrationComponent,
-    AboutComponent
+    AboutComponent,
+    CheckTestComponent
   ],
   imports: [
     CommonModule,

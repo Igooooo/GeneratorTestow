@@ -1,0 +1,22 @@
+<div class="form-1-container section-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 offset-md-1 form-1-box wow fadeInUp">
+                <fieldset class="form-group border p-3">
+                    <legend class="w-auto px-2">Wyniki testu</legend><br>
+                    <fieldset class="form-group border p-3" *ngFor="let answer of checkTestDB.question; let i=index">
+                        Pytanie: {{ checkTestDB.question[i].title }} Typ: {{checkTestDB.question[i].type }} <br>
+                        Odpowiedz poprawna: {{checkTestDB.question[i].goodAnswer }} <br>
+                        Twoja odpowiedz {{ checkTestDB.question[i].selectedAnswer }} <br>
+                        <div *ngIf ="checkTestDB.question[i].goodAnswer === checkTestDB.question[i].selectedAnswer; else badAnswer">
+                            Dobra odpowiedz!!!
+                        </div> 
+                        <ng-template #badAnswer>
+                            Zła odpowiedz!!
+                        </ng-template>
+                    </fieldset>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { timer } from 'rxjs';
 import { testForm } from 'src/app/shared/model/testForm';
 import { MainService } from '../main.service';
@@ -65,7 +66,8 @@ export class TestComponent implements OnInit {
   ] */
 
   constructor(private data: MainService,
-              private formBuilder: FormBuilder,) { 
+              private formBuilder: FormBuilder,
+              private router: Router) { 
     this.questionFrom = this.formBuilder.group({
         question: this.formBuilder.array([])
     })
@@ -106,6 +108,7 @@ export class TestComponent implements OnInit {
 
   onSubmit(){
     console.log(this.questionFrom.value);
+    this.router.navigate(['checkTest']);  
   }
 
   onfinishTime(): void {
