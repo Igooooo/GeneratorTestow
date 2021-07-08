@@ -1,10 +1,14 @@
+
 <div class="form-1-container section-container">
     <div class="container">
         <div class="row"> 
             <div class="col-md-10 offset-md-1 form-1-box wow fadeInUp">
                 <fieldset class="form-group border p-3" >
-                    <legend class="w-auto px-2"> <strong> TEST </strong> ilość pytań: {{ numberOfQuestion }} rodzaj: {{questionType}} Czas: {{ timer }} minut</legend> <br>
-                    <legend class="w-auto px-2"></legend>
+                    <legend class="w-auto px-2"> <strong> TEST </strong> ilość pytań: {{ numberOfQuestion }} rodzaj: {{questionType}}</legend> <br>
+                    <div class="countdown"  simpleCountdown 
+                                            [dateTo]="currentTimeInSeconds" 
+                                            [endMessage]="'Koniec czasu!'"
+                                            (finish)="onfinishTime()"></div>
                     <fieldset class="form-group border p-3" > 
                         <form [formGroup]="questionFrom" (ngSubmit)="onSubmit()">
                             <div formArrayName="question">
@@ -12,23 +16,23 @@
                                     <div class="form-group border" [formGroupName]="i">
                                         <div class="form-group">
                                             <div class="custom-control-inline">
-                                                <label> {{ questionDB[i].questionName }} </label>
+                                                <label> {{ qDB.question[i].title }} </label>
                                             </div><br>
                                             <div class="form-check-inline">
-                                                <input class="form-check-input" type="radio" value="A" formControlName="answer">
-                                                <label class="form-check-label">{{ questionDB[i].a1 }}</label>      
+                                                <input class="form-check-input" type="radio" value="{{ qDB.question[i].answers[0].id }}" formControlName="answer_id">
+                                                <label class="form-check-label">{{ qDB.question[i].answers[0].answer}}</label>      
                                             </div>
                                             <div class="form-check-inline">
-                                                <input class="form-check-input" type="radio" value="B" formControlName="answer">
-                                                <label class="form-check-label">{{ questionDB[i].a2 }}</label>     
+                                                <input class="form-check-input" type="radio" value="{{ qDB.question[i].answers[1].id }}" formControlName="answer_id">
+                                                <label class="form-check-label">{{ qDB.question[i].answers[1].answer }}</label>     
                                             </div>
                                             <div class="form-check-inline">
-                                                <input class="form-check-input" type="radio" value="C" formControlName="answer">
-                                                <label class="form-check-label">{{ questionDB[i].a3 }}</label>     
+                                                <input class="form-check-input" type="radio" value="{{ qDB.question[i].answers[2].id }}" formControlName="answer_id">
+                                                <label class="form-check-label">{{ qDB.question[i].answers[2].answer }}</label>     
                                             </div>
                                             <div class="form-check-inline">
-                                                <input class="form-check-input" type="radio" value="D" formControlName="answer">
-                                                <label class="form-check-label">{{ questionDB[i].a4 }}</label>     
+                                                <input class="form-check-input" type="radio" value="{{ qDB.question[i].answers[3].id }}" formControlName="answer_id">
+                                                <label class="form-check-label">{{ qDB.question[i].answers[3].answer}}</label>     
                                             </div>
                                         </div>
                                     </div>
