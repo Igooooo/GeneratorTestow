@@ -11,8 +11,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxSimpleCountdownModule } from 'ngx-simple-countdown';
 import { CheckTestComponent } from './check-test/check-test.component';
 import { PatternCardComponent } from './pattern-card/pattern-card.component';
-import {MatDialogModule} from "@angular/material/dialog";
-
+import { MatDialogModule } from "@angular/material/dialog";
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 @NgModule({
   declarations: [
     MainPageComponent,
@@ -21,7 +21,8 @@ import {MatDialogModule} from "@angular/material/dialog";
     RegistrationComponent,
     AboutComponent,
     CheckTestComponent,
-    PatternCardComponent
+    PatternCardComponent,
+
   ],
   imports: [
     CommonModule,
@@ -30,7 +31,8 @@ import {MatDialogModule} from "@angular/material/dialog";
     ReactiveFormsModule,
     BrowserAnimationsModule,
     NgxSimpleCountdownModule,
-    MatDialogModule
+    MatDialogModule,
+    PdfViewerModule
   ]
 })
 export class MainModule { }
