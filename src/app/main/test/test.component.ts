@@ -6,6 +6,7 @@ import { testForm } from 'src/app/shared/model/testForm';
 import { MainService } from '../main.service';
 import { PatternCardComponent } from '../pattern-card/pattern-card.component';
 import { MatDialog } from '@angular/material/dialog';
+import { qDB } from 'src/app/shared/model/qDB';
 @Component({
   selector: 'app-test',
   templateUrl: './test.component.html',
@@ -18,15 +19,12 @@ export class TestComponent implements OnInit {
   source = timer(1000);
   questionFrom: FormGroup;
   testForm?: testForm;
-  numberOfQuestion?: any;
+  numberOfQuestion?: number;
   questionType?:string;
-  timer?: any;
-  currentTimeInSeconds?: any
-  questionTab: any = [];
+  timer?: number;
+  currentTimeInSeconds?: any; // do otypowania. Nie działa number oraz date
 
-  options = ['a', 'b', 'c', 'd'];
-
-  qDB = {
+  qDB = { // problem z otypowanieniem - nie wiem jak answers:[{ type answer } x4
     id: 'test 1',
     question: [
       {id: '1', type: 'type a',title: 'pytanie 1',answers:[{ id: 'q1-a1',answer: 'odp A'},{id: 'q1-a2',answer: 'odp B'},{id: 'q1-a3',answer: 'odp C'},{ id: 'q1-a4', answer: 'odp D'}]},
@@ -47,25 +45,6 @@ export class TestComponent implements OnInit {
     ]
   }
 
-  /*
-  questionDB = [
-    {questionName: 'pytanie 1', a1:"A tekst", a2:"B tekst", a3:"C tekst", a4:"D tekst", type: "type 1"},
-    {questionName: 'pytanie 2', a1:"A tekst", a2:"B tekst", a3:"C tekst", a4:"D tekst", type: "type 2"},
-    {questionName: 'pytanie 3', a1:"A tekst", a2:"B tekst", a3:"C tekst", a4:"D tekst", type: "type 3"},
-    {questionName: 'pytanie 4', a1:"A tekst", a2:"B tekst", a3:"C tekst", a4:"D tekst", type: "type 1"},
-    {questionName: 'pytanie 5', a1:"A tekst", a2:"B tekst", a3:"C tekst", a4:"D tekst", type: "type 2"},
-    {questionName: 'pytanie 6', a1:"A tekst", a2:"B tekst", a3:"C tekst", a4:"D tekst", type: "type 3"},
-    {questionName: 'pytanie 7', a1:"A tekst", a2:"B tekst", a3:"C tekst", a4:"D tekst", type: "type 1"},
-    {questionName: 'pytanie 8', a1:"A tekst", a2:"B tekst", a3:"C tekst", a4:"D tekst", type: "type 2"},
-    {questionName: 'pytanie 9', a1:"A tekst", a2:"B tekst", a3:"C tekst", a4:"D tekst", type: "type 3"},
-    {questionName: 'pytanie 10', a1:"A tekst", a2:"B tekst", a3:"C tekst", a4:"D tekst", type: "type 1"},
-    {questionName: 'pytanie 11', a1:"A tekst", a2:"B tekst", a3:"C tekst", a4:"D tekst", type: "type 2"},
-    {questionName: 'pytanie 12', a1:"A tekst", a2:"B tekst", a3:"C tekst", a4:"D tekst", type: "type 3"},
-    {questionName: 'pytanie 13', a1:"A tekst", a2:"B tekst", a3:"C tekst", a4:"D tekst", type: "type 1"},
-    {questionName: 'pytanie 14', a1:"A tekst", a2:"B tekst", a3:"C tekst", a4:"D tekst", type: "type 2"},
-    {questionName: 'pytanie 15', a1:"A tekst", a2:"B tekst", a3:"C tekst", a4:"D tekst", type: "type 3"}, 
-  ] */
-
   constructor(private data: MainService,
               private formBuilder: FormBuilder,
               private router: Router,
@@ -76,20 +55,21 @@ export class TestComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.data.currentMessage.subscribe(msg => this.testForm = msg);
-    this.numberOfQuestion = this.testForm?.volume;  
-    this.questionType = this.testForm?.question;
-    this.timer = this.testForm?.time;
-    this.currentTimeInSeconds=Math.floor(Date.now()/1000 + this.timer*60);
-    this.addQuestionToForm(this.numberOfQuestion);
-    this.source.subscribe(val => console.log(val));
+    this.data.currentMessage.subscribe(data => {
+      this.testForm = data;
+      this.numberOfQuestion = this.testForm.volume;  
+      this.questionType = this.testForm.question;
+      this.timer = this.testForm.time;
+      this.addQuestionToForm(this.numberOfQuestion);
+      this.currentTimeInSeconds = Math.floor(Date.now()/1000 + this.timer*60);
+    });
   }
 
   get question() {
-    return this.questionFrom.get("question") as FormArray
+    return this.questionFrom.get("question") as FormArray;
   } 
 
-  newQuestionNew(question: any): FormGroup {
+  newQuestion(question: any): FormGroup { // problem z interfejsem question!! 
     return this.formBuilder.group({
       question_id: [question.id, Validators.required],
       question: [question.title, Validators.required],
@@ -98,30 +78,30 @@ export class TestComponent implements OnInit {
     })
   }
 
-  addQuestionToForm(value: number) {
+  addQuestionToForm(value: number): void {
     for(let i = 0; i < value ; i++) {
-      this.question.push(this.newQuestionNew(this.qDB.question[i])) // this.questionDB[i]
+      this.question.push(this.newQuestion(this.qDB.question[i])) 
     }
   }
   
-  deleteQuestion(questionIndex: number) {
+  deleteQuestion(questionIndex: number): void {
     this.question.removeAt(questionIndex);
   }
 
-  onSubmit(){
+  onSubmit(): void {
     console.log(this.questionFrom.value);
     this.router.navigate(['checkTest']);  
   }
 
   onfinishTime(): void {
-    console.log('Koniec!');
     this.onSubmit();
   }
 
   openDialog() : void {
     this.dialog.open(PatternCardComponent, {
-      height: '1800px',
-      width: '1800px'
+    height: '1800px',
+    width: '1800px',
+    //position: {top: '20px'}
     });
   }
 }

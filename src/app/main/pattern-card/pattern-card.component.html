@@ -1,14 +1,12 @@
 <div>
-    <h2 mat-dialog-title>Karta wzorów</h2>
+    <div mat-dialog-actions>
+        <h2 mat-dialog-title>Karta wzorów</h2>
+        <button mat-button (click)="onNoClick()">ZAMKNIJ</button>
+    </div>
     <div class="text-right" mat-dialog-content>
         <pdf-viewer [src]="pdfSrc"
                     [render-text]="true"
                     style="display: block;">
         </pdf-viewer>
     </div>
-    <!-- 
-        <div class="text-right" mat-dialog-actions>
-            <button mat-button (click)="onNoClick()">ZAMKNIJ</button>
-        </div>
-    -->
 </div>
