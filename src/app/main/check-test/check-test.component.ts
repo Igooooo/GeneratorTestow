@@ -32,5 +32,5 @@ export class CheckTestComponent implements OnInit {
       {id: '15', type: 'type a',title: 'pytanie 15', selectedAnswer: 'odp A', goodAnswer: 'odp A',allAnswers:[{ id: 'q15-a1',answer: 'odp A'},{id: 'q15-a2',answer: 'odp B'},{id: 'q15-a3',answer: 'odp C'},{ id: 'q15-a4', answer: 'odp D'}]},
     ]
   }
-
+  
 }

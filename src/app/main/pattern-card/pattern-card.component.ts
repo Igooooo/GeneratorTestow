@@ -7,8 +7,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
   styleUrls: ['./pattern-card.component.scss']
 })
 export class PatternCardComponent implements OnInit {
-  //pdfSrc = "https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf";
-  pdfSrc = "https://cke.gov.pl/images/_EGZAMIN_MATURALNY_OD_2015/Informatory/2015/MATURA_2015_Wybrane_wzory_matematyczne.pdf";
+  pdfSrc: string = "https://cke.gov.pl/images/_EGZAMIN_MATURALNY_OD_2015/Informatory/2015/MATURA_2015_Wybrane_wzory_matematyczne.pdf";
 
   constructor(public dialog: MatDialogRef<PatternCardComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
