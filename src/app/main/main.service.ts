@@ -7,12 +7,13 @@ import { testForm } from '../shared/model/testForm';
 })
 export class MainService {
 
-  private messageSource = new BehaviorSubject<testForm>({} as any);
-  currentMessage = this.messageSource.asObservable();
+  private testForm = new BehaviorSubject<testForm>({} as testForm);
+  currentTestForm = this.testForm.asObservable();
 
-  constructor() { }
+  constructor() {}
 
-  changeMessage(message: testForm) {
-    this.messageSource.next(message);
+  createTestForm(test: testForm) {
+    this.testForm.next(test);
   }
+  
 }

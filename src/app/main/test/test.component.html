@@ -8,10 +8,11 @@
                     <div>
                         <button (click)="openDialog()">KARTA WZORÓW</button>
                     </div>
-                    <div class="countdown"  simpleCountdown 
-                                            [dateTo]="currentTimeInSeconds" 
-                                            [endMessage]="'Koniec czasu!'"
-                                            (finish)="onfinishTime()"></div>
+                    <div class="countdown"  
+                        simpleCountdown 
+                        [dateTo]="currentTimeInSeconds" 
+                        [endMessage]="'Koniec czasu!'"
+                        (finish)="onfinishTime()"></div>
                     <fieldset class="form-group border p-3" > 
                         <form [formGroup]="questionFrom" (ngSubmit)="onSubmit()">
                             <div formArrayName="question">
@@ -23,19 +24,27 @@
                                             </div><br>
                                             <div class="form-check-inline">
                                                 <input class="form-check-input" type="radio" value="{{ qDB.question[i].answers[0].id }}" formControlName="answer_id">
-                                                <label class="form-check-label">{{ qDB.question[i].answers[0].answer}}</label>      
+                                                <label class="form-check-label">
+                                                    {{ qDB.question[i].answers[0].answer}}
+                                                </label>      
                                             </div>
                                             <div class="form-check-inline">
                                                 <input class="form-check-input" type="radio" value="{{ qDB.question[i].answers[1].id }}" formControlName="answer_id">
-                                                <label class="form-check-label">{{ qDB.question[i].answers[1].answer }}</label>     
+                                                <label class="form-check-label">
+                                                    {{ qDB.question[i].answers[1].answer }}
+                                                </label>     
                                             </div>
                                             <div class="form-check-inline">
                                                 <input class="form-check-input" type="radio" value="{{ qDB.question[i].answers[2].id }}" formControlName="answer_id">
-                                                <label class="form-check-label">{{ qDB.question[i].answers[2].answer }}</label>     
+                                                <label class="form-check-label">
+                                                    {{ qDB.question[i].answers[2].answer }}
+                                                </label>     
                                             </div>
                                             <div class="form-check-inline">
                                                 <input class="form-check-input" type="radio" value="{{ qDB.question[i].answers[3].id }}" formControlName="answer_id">
-                                                <label class="form-check-label">{{ qDB.question[i].answers[3].answer}}</label>     
+                                                <label class="form-check-label">
+                                                    {{ qDB.question[i].answers[3].answer}}
+                                                </label>     
                                             </div>
                                         </div>
                                     </div>
@@ -45,7 +54,9 @@
                     </fieldset>
                     <div class="form-group row text-center">
                         <div class="col">
-                            <button type="submit" class="btn btn-primary btn-customized"  (click) = "onSubmit()">Sprawdź</button>
+                            <button type="submit" class="btn btn-primary btn-customized" (click)="onSubmit()">
+                                Sprawdź
+                            </button>
                         </div>
                     </div>
                 </fieldset>    
