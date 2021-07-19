@@ -14,16 +14,16 @@ import { MainService } from '../main.service';
   styleUrls: ['./main-page.component.scss']
 })
 export class MainPageComponent implements OnInit {
-  testFrom  = new FormGroup({})
-  typeOfSubjectDefault = subjectType.matematyka;
-  typeOfSubject = Object.values(subjectType);
-  typeOfQuestionDefault = questionType.all;
-  typeOfQuestion = Object.values(questionType);
-  typeOfVolumenDefault = volumenType.min;
-  typeOfVolumen = Object.values(volumenType);
-  typeOfTimeDefault = timeType.avr;
-  typeOfTime = Object.values(timeType);
-  sendToTest ?: testForm;
+  testFrom = new FormGroup({})
+  typeOfSubjectDefault: string = subjectType.matematyka;
+  typeOfSubject: string[] = Object.values(subjectType);
+  typeOfQuestionDefault: string = questionType.all;
+  typeOfQuestion: string[] = Object.values(questionType);
+  typeOfVolumenDefault: string = volumenType.min;
+  typeOfVolumen: string[] = Object.values(volumenType);
+  typeOfTimeDefault: string = timeType.avr;
+  typeOfTime: string[] = Object.values(timeType);
+  sendToTest?: testForm;
 
   constructor(private router: Router,
               private formBuilder: FormBuilder,
@@ -31,14 +31,14 @@ export class MainPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.createTestFrom();
-    this.data.currentMessage.subscribe(msg => this.sendToTest = msg);
+    this.data.currentTestForm.subscribe(data => this.sendToTest = data);
   }
 
-  sendMessage(zmienna: testForm) {
-    this.data.changeMessage(zmienna);
+  sendMessage(testForm: testForm): void {
+    this.data.createTestForm(testForm);
   }
 
-  createTestFrom() : void {
+  createTestFrom(): void {
     this.testFrom = this.formBuilder.group({
       subject: [this.typeOfSubjectDefault, Validators.compose([Validators.required])],
       question: [this.typeOfQuestionDefault, Validators.compose([Validators.required])],
@@ -47,7 +47,7 @@ export class MainPageComponent implements OnInit {
     });
   }
 
-  submit() : void {
+  submit(): void {
     this.sendToTest = this.testFrom.value;
     this.sendMessage(this.testFrom.value);
     this.router.navigate(['test']);  

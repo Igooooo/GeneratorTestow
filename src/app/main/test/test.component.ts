@@ -14,17 +14,14 @@ import { qDB } from 'src/app/shared/model/qDB';
 })
 
 export class TestComponent implements OnInit {
-
-
-  source = timer(1000);
   questionFrom: FormGroup;
   testForm?: testForm;
   numberOfQuestion?: number;
-  questionType?:string;
+  questionType?: string;
   timer?: number;
   currentTimeInSeconds?: any; // do otypowania. Nie działa number oraz date
 
-  qDB = { // problem z otypowanieniem - nie wiem jak answers:[{ type answer } x4
+  qDB = { // problem z otypowanieniem - nie wiem jak answers:[{ type answer } x4]
     id: 'test 1',
     question: [
       {id: '1', type: 'type a',title: 'pytanie 1',answers:[{ id: 'q1-a1',answer: 'odp A'},{id: 'q1-a2',answer: 'odp B'},{id: 'q1-a3',answer: 'odp C'},{ id: 'q1-a4', answer: 'odp D'}]},
@@ -55,7 +52,7 @@ export class TestComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.data.currentMessage.subscribe(data => {
+    this.data.currentTestForm.subscribe(data => {
       this.testForm = data;
       this.numberOfQuestion = this.testForm.volume;  
       this.questionType = this.testForm.question;
