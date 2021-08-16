@@ -21,8 +21,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     RegistrationComponent,
     AboutComponent,
     CheckTestComponent,
-    PatternCardComponent,
-
+    PatternCardComponent
   ],
   imports: [
     CommonModule,
