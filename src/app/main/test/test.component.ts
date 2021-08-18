@@ -20,6 +20,10 @@ export class TestComponent implements OnInit {
   questionType?: string;
   timer?: number;
   currentTimeInSeconds?: any; // do otypowania. Nie działa number oraz date
+  step: number = 5;
+  limitQuestionMin: number = 0;
+  limitQuestionMax: number = this.step;
+  nextQuestion: number = 0;
 
   qDB = { // problem z otypowanieniem - nie wiem jak answers:[{ type answer } x4]
     id: 'test 1',
@@ -101,4 +105,26 @@ export class TestComponent implements OnInit {
     //position: {top: '20px'}
     });
   }
+
+  next() : void {   
+    if (this.limitQuestionMin + this.step < this.qDB.question.length){ // na długości ilości pytań bedzie działać
+      this.limitQuestionMin=this.limitQuestionMin+this.step
+      this.limitQuestionMax=this.limitQuestionMax+this.step
+      this.nextQuestion += this.step;
+    } else {
+      this.limitQuestionMin=this.limitQuestionMin
+      this.limitQuestionMax=this.limitQuestionMax
+    }
+  }
+
+  back() : void {
+    if (this.limitQuestionMin - this.step >= 0){
+      this.limitQuestionMin=this.limitQuestionMin-this.step
+      this.limitQuestionMax=this.limitQuestionMax-this.step
+      this.nextQuestion -= this.step;
+    } else {
+      this.limitQuestionMin=this.limitQuestionMin
+      this.limitQuestionMax=this.limitQuestionMax
+    }
+  }  
 }
