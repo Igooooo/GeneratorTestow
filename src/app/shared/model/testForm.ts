@@ -1,6 +1,8 @@
+import { questionType } from "./questionType";
+
 export interface testForm{
     subject: string;
-    question: string;
+    question: questionType;
     volume: number;
     time: number;
 }
