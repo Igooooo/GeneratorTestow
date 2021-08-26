@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { questionType } from 'src/app/shared/enums/questionType';
 import { subjectType } from 'src/app/shared/enums/subjectType';
@@ -32,6 +32,7 @@ export class MainPageComponent implements OnInit {
   ngOnInit(): void {
     this.createTestFrom();
     this.data.currentTestForm.subscribe(data => this.sendToTest = data);
+    this.addQuestionTypeToForm(this.typeOfQuestion.length);
   }
 
   sendMessage(testForm: testForm): void {
@@ -41,15 +42,39 @@ export class MainPageComponent implements OnInit {
   createTestFrom(): void {
     this.testFrom = this.formBuilder.group({
       subject: [this.typeOfSubjectDefault, Validators.compose([Validators.required])],
-      question: [this.typeOfQuestionDefault, Validators.compose([Validators.required])],
+      question: this.formBuilder.array([]),
       volume: [this.typeOfVolumenDefault,Validators.compose([Validators.required])],
-      time: [this.typeOfTimeDefault,Validators.compose([Validators.required])], 
+      time: [this.typeOfTimeDefault,Validators.compose([Validators.required])],  
     });
+  }
+
+  get question() {
+    return this.testFrom.get("question") as FormArray;
+  } 
+
+  QuestionTypeFrom(type: any): FormGroup { // problem z interfejsem question!!
+    return this.formBuilder.group({
+      type: [type, Validators.required],
+      checked: [false],
+      volume: [this.typeOfVolumenDefault, Validators.required]
+    })
+  }
+
+  addQuestionTypeToForm(value: number): void {
+    for(let i = 0; i < value ; i++) {
+      this.question.push(this.QuestionTypeFrom(this.typeOfQuestion[i])) 
+    }
   }
 
   submit(): void {
     this.sendToTest = this.testFrom.value;
     this.sendMessage(this.testFrom.value);
+    console.log('Test ', this.testFrom.value)
     this.router.navigate(['test']);  
   }
+
+  selectAll() {
+    
+  }
+
 }

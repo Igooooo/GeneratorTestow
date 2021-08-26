@@ -59,7 +59,7 @@ export class TestComponent implements OnInit {
     this.data.currentTestForm.subscribe(data => {
       this.testForm = data;
       this.numberOfQuestion = this.testForm.volume;  
-      this.questionType = this.testForm.question;
+      //this.questionType = this.testForm.question;
       this.timer = this.testForm.time;
       this.addQuestionToForm(this.numberOfQuestion);
       this.currentTimeInSeconds = Math.floor(Date.now()/1000 + this.timer*60);
@@ -70,7 +70,7 @@ export class TestComponent implements OnInit {
     return this.questionFrom.get("question") as FormArray;
   } 
 
-  newQuestion(question: any): FormGroup { // problem z interfejsem question!! 
+  questionForm(question: any): FormGroup { // problem z interfejsem question!! ZMIEN NAZWĘ z NEW
     return this.formBuilder.group({
       question_id: [question.id, Validators.required],
       question: [question.title, Validators.required],
@@ -81,7 +81,7 @@ export class TestComponent implements OnInit {
 
   addQuestionToForm(value: number): void {
     for(let i = 0; i < value ; i++) {
-      this.question.push(this.newQuestion(this.qDB.question[i])) 
+      this.question.push(this.questionForm(this.qDB.question[i])) 
     }
   }
   

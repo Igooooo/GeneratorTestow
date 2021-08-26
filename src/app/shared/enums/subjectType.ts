@@ -1,3 +1,4 @@
 export enum subjectType {
-    matematyka = 'Matematyka'
+    matematyka = 'Matematyka',
+    test ='Test'
 } 
