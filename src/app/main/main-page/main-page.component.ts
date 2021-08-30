@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { questionType } from 'src/app/shared/enums/questionType';
 import { subjectType } from 'src/app/shared/enums/subjectType';
+import { testType } from 'src/app/shared/enums/testType';
 import { timeType } from 'src/app/shared/enums/timeType';
 import { volumenType } from 'src/app/shared/enums/volumenType';
 import { testForm } from 'src/app/shared/model/testForm';
@@ -17,11 +18,14 @@ export class MainPageComponent implements OnInit {
   testFrom = new FormGroup({})
   typeOfSubjectDefault: string = subjectType.matematyka;
   typeOfSubject: string[] = Object.values(subjectType);
-  typeOfQuestionDefault: string = questionType.all;
+  //typeOfQuestionDefault: string = questionType.all;
   typeOfQuestion: string[] = Object.values(questionType);
   typeOfVolumenDefault: string = volumenType.min;
   typeOfVolumen: string[] = Object.values(volumenType);
   typeOfTimeDefault: string = timeType.avr;
+  testType: string[] = Object.values(testType);
+  testTypeDefault: string = testType.all;
+  testTypeConfigure: string = testType.choiceQuestions;
   typeOfTime: string[] = Object.values(timeType);
   sendToTest?: testForm;
 
@@ -41,10 +45,11 @@ export class MainPageComponent implements OnInit {
 
   createTestFrom(): void {
     this.testFrom = this.formBuilder.group({
+      testType: [this.testTypeDefault,Validators.compose([Validators.required])],
       subject: [this.typeOfSubjectDefault, Validators.compose([Validators.required])],
-      question: this.formBuilder.array([]),
       volume: [this.typeOfVolumenDefault,Validators.compose([Validators.required])],
       time: [this.typeOfTimeDefault,Validators.compose([Validators.required])],  
+      question: this.formBuilder.array([]),
     });
   }
 
@@ -55,7 +60,7 @@ export class MainPageComponent implements OnInit {
   QuestionTypeFrom(type: any): FormGroup { // problem z interfejsem question!!
     return this.formBuilder.group({
       type: [type, Validators.required],
-      checked: [false],
+      isSelected: [false],
       volume: [this.typeOfVolumenDefault, Validators.required]
     })
   }
@@ -73,7 +78,7 @@ export class MainPageComponent implements OnInit {
     this.router.navigate(['test']);  
   }
 
-  selectAll() {
+  selectAllCheckbox() {
     
   }
 

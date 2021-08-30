@@ -1,5 +1,5 @@
 export enum questionType {
-    all = 'wszystkie',
+    //all = 'wszystkie',
     q1 = 'Funkcja liniowa',
     q2 = 'Procenty',
     q3 = 'Trygonometria',
